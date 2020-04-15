@@ -1,0 +1,4 @@
+# Project exclude paths
+/sputnikconfig/bundles/
+/sputnikdemo/bundles/
+/target/
