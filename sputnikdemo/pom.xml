@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>sputnik-api</artifactId>
+  <name>Apache Karaf :: Sputnik :: REST :: Blueprint</name>
+  <packaging>bundle</packaging>
+  <version>${parent.version}</version>
+<!--  For some reasons karaf plugin references here, so don't change-->
+
+  <repositories>
+    <repository>
+      <id>central</id>
+      <name>Maven Central</name>
+      <url>https://repo1.maven.org/maven2/</url>
+    </repository>
+  </repositories>
+
+  <parent>
+    <groupId>ru.mts.ms.sputnik</groupId>
+    <artifactId>sputnik-project</artifactId>
+    <version>4.2.8</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-rs-client</artifactId>
+      <version>${cxf.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>osgi.cmpn</artifactId>
+      <version>6.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.10.2</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>javax.ws.rs-api</artifactId>
+      <version>2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.25</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.7.25</version>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.17</version>
+    </dependency>
+
+    <!--    <dependency>-->
+    <!--      <groupId>org.camunda.bpm</groupId>-->
+    <!--      <artifactId>camunda-external-task-client</artifactId>-->
+    <!--      <version>1.3.0</version>-->
+    <!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>org.camunda.bpm.extension.osgi</groupId>-->
+<!--      <artifactId>camunda-bpm-karaf-feature</artifactId>-->
+<!--      <version>5.1.0</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>org.camunda.bpm.extension.osgi</groupId>-->
+<!--      <artifactId>camunda-bpm-osgi</artifactId>-->
+<!--      <version>5.1.0</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>org.camunda.bpm</groupId>-->
+<!--      <artifactId>camunda-engine</artifactId>-->
+<!--      <version>7.10.0</version>-->
+<!--      <scope>provided</scope>-->
+<!--    </dependency>-->
+
+    <dependency>
+      <groupId>org.apache.karaf.tooling</groupId>
+      <artifactId>karaf-maven-plugin</artifactId>
+      <version>${parent.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>ru.mts.ms.sputnik</groupId>
+      <artifactId>sputnik-config</artifactId>
+      <version>1.0</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+
+
+  <build>
+    <directory>${basedir}/bundles</directory>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <configuration>
+          <instructions>
+            <Import-Package>
+<!--              a list of packages that are required by the bundle's contained packages. May be absent-->
+              com.fasterxml.jackson.jaxrs.json,
+              org.osgi.service.blueprint,
+              javax.ws.rs.*
+            </Import-Package>
+            <Export-Package>
+
+<!--              which of the available packages to copy into the bundle and export,-->
+            </Export-Package>
+            <Private-Package>
+              ru.mts.sales.dealer.rest
+            </Private-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.karaf.tooling</groupId>
+        <artifactId>karaf-maven-plugin</artifactId>
+        <version>${parent.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>8</source>
+          <target>8</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
